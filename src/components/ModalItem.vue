@@ -76,4 +76,9 @@ export default {
 .modal.sale .actions a {
   color: white;
 }
+
+.modal.crazy {
+  background-color: green;
+  color: white;
+}
 </style>

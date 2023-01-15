@@ -1,8 +1,8 @@
 <template>
   <h1>{{ title }}</h1>
   <p>Welcome..</p>
-  <div v-if="showModal">
-    <modal-item theme="sale" @close="toggleModal">
+  <teleport v-if="showModal" to=".modals">
+    <modal-item theme="" @close="toggleModal">
       <!-- named slots -->
       <template #links>
         <a href="#">sign up now </a>
@@ -12,8 +12,16 @@
       <h1>Epiq Giveaway!</h1>
       <p>Grab you t-shirts for half price!!</p>
     </modal-item>
-  </div>
+  </teleport>
   <button @click="toggleModal">Show Modal</button>
+
+  <teleport v-if="showModalTwo" to=".modals">
+    <modal-item theme="sale" @close="toggleModalTwo">
+      <h3>Click now for some crazy stuff!!!</h3>
+      <p>Promo codes</p>
+    </modal-item>
+  </teleport>
+  <button @click="toggleModalTwo">Show Modal 2</button>
 </template>
 
 <script>
@@ -30,12 +38,16 @@ export default {
       header: "Sign up for our newsletter",
       text: "You wont regret it!",
       showModal: false,
+      showModalTwo: false,
     };
   },
   methods: {
     toggleModal() {
       // reverse the current value of showModal
       this.showModal = !this.showModal;
+    },
+    toggleModalTwo() {
+      this.showModalTwo = !this.showModalTwo;
     },
   },
 };
