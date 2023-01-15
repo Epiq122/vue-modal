@@ -1,29 +1,62 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <h1>{{ title }}</h1>
+  <p>Welcome..</p>
+  <div v-if="showModal">
+    <modal-item theme="sale" @close="toggleModal">
+      <!-- named slots -->
+      <template #links>
+        <a href="#">sign up now </a>
+        <a href="#">more info</a>
+      </template>
+      <!-- this is know as a slot -->
+      <h1>Epiq Giveaway!</h1>
+      <p>Grab you t-shirts for half price!!</p>
+    </modal-item>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <button @click="toggleModal">Show Modal</button>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
+<script>
+import ModalItem from "./components/ModalItem.vue";
+
+export default {
+  name: "App",
+  components: {
+    ModalItem,
+  },
+  data() {
+    return {
+      title: "My First Vue App!",
+      header: "Sign up for our newsletter",
+      text: "You wont regret it!",
+      showModal: false,
+    };
+  },
+  methods: {
+    toggleModal() {
+      // reverse the current value of showModal
+      this.showModal = !this.showModal;
+    },
+  },
+};
+</script>
+
+<style>
+h1 {
+  border-bottom: 1px solid #ddd;
+  display: inline-block;
+  padding-bottom: 10px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.actions {
+  text-align: center;
+  margin: 30px 0 10px 0;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.actions a {
+  color: #333;
+  padding: 8px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  text-decoration: none;
+  margin: 10px;
 }
 </style>
